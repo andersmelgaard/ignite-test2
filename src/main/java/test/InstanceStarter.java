@@ -15,8 +15,6 @@ public class InstanceStarter {
 
     public static void main(String[] args) throws Exception {
         try (Ignite ignite = Ignition.start("config/example-ignite.xml")) {
-            System.out.println();
-            System.out.println(">>> Cache continuous query example started.");
             
             CacheConfiguration<Integer, String> conf = new CacheConfiguration<>(CACHE_NAME);
             conf.setAtomicityMode(CacheAtomicityMode.TRANSACTIONAL);
@@ -41,10 +39,6 @@ public class InstanceStarter {
         			for (int i = 0; i < keyCnt; i++)
         				cache.remove(i);
             	}
-            }
-            finally {
-                // Distributed cache could be removed from cluster only by #destroyCache() call.
-                ignite.destroyCache(CACHE_NAME);
             }
         }
     }
